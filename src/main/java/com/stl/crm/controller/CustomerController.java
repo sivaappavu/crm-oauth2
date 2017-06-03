@@ -84,6 +84,7 @@ public class CustomerController {
      * 
      */
     @RequestMapping(value = "/customers/{customerId}", method = RequestMethod.DELETE)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> deleteCustomer(@PathVariable long customerId) {
     	Customer customer = customerService.getCustomer(customerId);
     	customerService.deleteCustomer(customer);
