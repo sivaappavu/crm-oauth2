@@ -19,16 +19,16 @@ public class CrmUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	PasswordEncoder passwordEncoder;
+//	@Autowired
+//	PasswordEncoder passwordEncoder;
 	
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-    	if (userRepository.count() == 0) {
-    		System.out.println("There is no user exist in the database. So, adding two users");
-    		userRepository.save(new User("crmadmin", passwordEncoder.encode("adminpass"), Arrays.asList(new UserRole("USER"), new UserRole("ADMIN"))));
-    		userRepository.save(new User("crmuser", passwordEncoder.encode("crmpass"), Arrays.asList(new UserRole("USER"))));
-    	}
+//    	if (userRepository.count() == 0) {
+//    		System.out.println("There is no user exist in the database. So, adding two users");
+//    		userRepository.save(new User("crmadmin", passwordEncoder.encode("adminpass"), Arrays.asList(new UserRole("USER"), new UserRole("ADMIN"))));
+//    		userRepository.save(new User("crmuser", passwordEncoder.encode("crmpass"), Arrays.asList(new UserRole("USER"))));
+//    	}
     	
         User user = userRepository.findByUsername(userName);
         if(user == null){

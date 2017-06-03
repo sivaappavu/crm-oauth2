@@ -28,22 +28,23 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//	@Autowired
-//	private DataSource dataSource;
+	@Autowired
+	private DataSource dataSource;
 	
 	@Autowired
 	private ClientDetailsService clientDetailsService;
-/*
+
 	@Autowired
-	private CustomUserDetailsService customUserDetailsService;	
-*/	
+	private CrmUserDetailsService crmUserDetailsService;	
+	
+	/*
 	@Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
         .withUser("crmadmin").password("crmpass").roles("ADMIN","USER").and()
         .withUser("crmuser").password("pass123").roles("USER");
     }
-	
+	*/
 
     @Override
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -64,12 +65,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	  		.realmName("CRM_REALM");
     }
 
-/*    @Override
+    @Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    	auth.userDetailsService(customUserDetailsService)
-    		.passwordEncoder(passwordEncoder())
-    		;
-	}*/
+    	auth.userDetailsService(crmUserDetailsService)
+    		.passwordEncoder(passwordEncoder());
+	}
 	
     @Override
     @Bean

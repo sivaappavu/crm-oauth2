@@ -22,16 +22,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private static final int ONE_DAY = 60 * 60 * 24;
 	private static final int THIRTY_DAYS = 60 * 60 * 24 * 30; 
 	
-	//-- added the following to use the JdbcTokenStore
-	
-//	@Autowired
-//	private DataSource dataSource;
-	
+	@Autowired
+	private DataSource dataSource;
 	
 	@Autowired
 	private TokenStore tokenStore;
 
-	
 	@Autowired
 	private UserApprovalHandler userApprovalHandler;
 
@@ -39,8 +35,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Qualifier("authenticationManagerBean")
 	private AuthenticationManager authenticationManager;
 	
-//	@Autowired
-//	private CustomUserDetailsService customUserDetailsService;		
+	@Autowired
+	private CrmUserDetailsService crmUserDetailsService;		
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -61,9 +57,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
-		.authenticationManager(authenticationManager);
-		//.userDetailsService(customUserDetailsService);
-		
+		.authenticationManager(authenticationManager)
+		.userDetailsService(crmUserDetailsService);
 	}
 
 	@Override
