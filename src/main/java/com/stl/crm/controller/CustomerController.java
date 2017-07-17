@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stl.crm.domain.Customer;
+import com.stl.crm.security.CrmUserDetails;
+import com.stl.crm.security.CustomUserDetails;
 import com.stl.crm.service.CustomerService;
 
 @RestController
@@ -31,6 +33,13 @@ public class CustomerController {
      */	
 	@RequestMapping(value="/customers", method = RequestMethod.GET)
 	public ResponseEntity<?> getCustomers() {
+
+		/**
+		 * Obtaining information about the current user
+		 */
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CrmUserDetails principal = (CrmUserDetails) authentication.getPrincipal();
+        System.out.println("logged in user name:: " + principal.getUsername());
 		
 		Iterable<Customer> customerList = customerService.getCustomers();
 		return new ResponseEntity<>(customerList, HttpStatus.OK);

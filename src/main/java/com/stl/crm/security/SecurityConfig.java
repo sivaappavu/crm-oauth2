@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .withUser("crmadmin").password("crmpass").roles("ADMIN","USER").and()
         .withUser("crmuser").password("pass123").roles("USER");
     }
-	*/
+	*/	
 
     @Override
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -77,17 +77,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /*
 	@Bean
 	public TokenStore tokenStore() {
 		return new InMemoryTokenStore();
 	}
+	*/
 	
-	//-- added to use the JdbcTokenStore
-/*	@Bean
+	//-- use the JdbcTokenStore to store tokens
+	@Bean
 	public JdbcTokenStore tokenStore() {
 		return new JdbcTokenStore(dataSource);
 	}
-	*/
+	
 
 	@Bean
 	@Autowired

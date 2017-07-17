@@ -41,8 +41,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
-		//clients.jdbc(dataSource);
-		
+		clients.jdbc(dataSource);
+		/*
 		clients.inMemory()
 	        .withClient("crmClient1")
             .secret("crmSuperSecret")
@@ -52,6 +52,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             //.accessTokenValiditySeconds(ONE_DAY)
             .accessTokenValiditySeconds(300)
             .refreshTokenValiditySeconds(THIRTY_DAYS);
+		*/
 	}
 
 	@Override
